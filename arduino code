@@ -1,0 +1,167 @@
+#include<LiquidCrystal.h> LiquidCrystal lcd(1,10,11,5,6,7); 
+int ledpin = 13 ; int buttonState1 = 0 ; int buttonState2 = 0; //int startbutton = 0; int a[100]; int i; 
+void setup() { lcd.begin(16,2); 
+pinMode(8, INPUT); pinMode(9, INPUT); 
+pinMode(2, OUTPUT); pinMode(3, OUTPUT); 
+Serial.begin(9600); pinMode(ledpin,OUTPUT); pinMode(4,INPUT); lcd.print("boom clap!!"); 
+Serial.print("boom clap!!"); delay(3000); lcd.clear(); pinMode(12,INPUT); }void single() { delay(2000); 
+lcd.print("Starting single player game"); 
+Serial.print("\n Starting single player game"); delay(2000); lcd.clear(); 
+digitalWrite(2, LOW); digitalWrite(3, LOW); 
+// check if pushbutton is pressed. if it is, the 
+// button state is HIGH 
+digitalWrite(2, HIGH); 
+//level1 delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState2 == HIGH) { lcd.print("YOU LOSE"); 
+Serial.print("YOU LOSE"); delay(5000); lcd.clear(); 
+loop(); } if (buttonState1 == HIGH) { 
+digitalWrite(2, LOW); } 
+else 
+{lcd.print("YOU LOSE"); 
+Serial.print("YOU LOSE"); 
+delay(5000); lcd.clear(); loop(); } 
+digitalWrite(3,HIGH); //level 2 
+delay(2000);// read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState1 == HIGH) { lcd.print("YOU LOSE"); 
+Serial.print("YOU LOSE"); delay(5000); lcd.clear(); 
+loop(); } if (buttonState2 == HIGH) { 
+digitalWrite(3, LOW); } else 
+{lcd.print("YOU LOSE"); Serial.print("YOU LOSE"); delay(5000); lcd.clear(); loop(); } digitalWrite(2,HIGH);//level 3 delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState2 == HIGH) { lcd.print("YOU LOSE"); Serial.print("YOU LOSE"); 
+delay(5000); lcd.clear(); loop(); } if (buttonState1 == HIGH) { 
+digitalWrite(2, LOW); } else 
+{ lcd.print("YOU LOSE"); 
+Serial.print("YOU LOSE"); delay(5000); lcd.clear(); loop(); 
+} 
+digitalWrite(3,HIGH);//level 4 delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState1 == HIGH) { lcd.print("YOU LOSE"); Serial.print("YOU LOSE"); 
+delay(5000); lcd.clear(); loop(); } if (buttonState2 == HIGH) { 
+digitalWrite(3, LOW); } else 
+{ lcd.print("YOU LOSE"); 
+Serial.print("YOU LOSE"); delay(5000); lcd.clear(); loop(); } digitalWrite(2,HIGH);// level 5 delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState2 == HIGH) { lcd.print("YOU LOSE"); Serial.print("YOU LOSE"); delay(5000); lcd.clear(); 
+loop(); } 
+if (buttonState1 == HIGH) { 
+digitalWrite(2, LOW); } else 
+{lcd.print("YOU LOSE"); Serial.print("YOU LOSE"); delay(5000); lcd.clear(); 
+loop(); } digitalWrite(2,HIGH); digitalWrite(3,HIGH);//level 6 delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState2 == HIGH && buttonState1 == HIGH) 
+{ 
+digitalWrite(3, LOW); digitalWrite(2, LOW); } else 
+{ lcd.print("YOU LOSE"); Serial.print("YOU LOSE"); delay(5000); lcd.clear(); 
+loop(); } digitalWrite(2,HIGH);// level 7 delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState2 == HIGH) { lcd.print("YOU LOSE"); Serial.print("YOU LOSE"); 
+delay(5000); lcd.clear(); 
+loop(); } if (buttonState1 == HIGH) { 
+digitalWrite(2, LOW); } else 
+{lcd.print("YOU LOSE"); Serial.print("YOU LOSE"); 
+delay(3000); lcd.clear(); 
+loop(); } digitalWrite(2,HIGH);// level 8 delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState2 == HIGH) { lcd.print("YOU LOSE"); Serial.print("YOU LOSE"); delay(5000); 
+lcd.clear(); 
+loop(); } if (buttonState1 == HIGH) { 
+digitalWrite(2, LOW); } else 
+{lcd.print("YOU LOSE"); Serial.print("YOU LOSE"); delay(5000); 
+lcd.clear(); loop(); } 
+digitalWrite(3,HIGH);// level 9 delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState1 == HIGH) { lcd.print("YOU LOSE"); Serial.print("YOU LOSE"); delay(5000); lcd.clear(); 
+loop(); } if (buttonState2 == HIGH) { 
+digitalWrite(3, LOW); } else 
+{ lcd.print("YOU LOSE"); Serial.print("YOU LOSE"); delay(5000); 
+lcd.clear(); loop(); } digitalWrite(3,HIGH); // level 10 digitalWrite(2,HIGH); delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState2 == HIGH && buttonState1 == HIGH) 
+{ 
+digitalWrite(3, LOW); digitalWrite(2, LOW); } else 
+{ lcd.print("YOU LOSE"); Serial.print("YOU LOSE"); 
+delay(5000); lcd.clear(); 
+loop(); } lcd.print("you are a pro!! you win"); Serial.print("\n you are a pro!! you win"); 
+delay(5000); lcd.clear(); }void loop(){ 
+digitalWrite(2, LOW); digitalWrite(3, LOW); //lcd.print("Start button."); lcd.clear(); lcd.print("press touch sensor to play multiplayer"); 
+Serial.print("\n press touch sensor to play multiplayer"); 
+delay(5000); 
+/* lcd.clear(); 
+startbutton=digitalRead(12); if(startbutton==LOW) { 
+loop(); } delay(5000);*/ 
+if (digitalRead(4) == HIGH) 
+{digitalWrite(ledpin,HIGH); 
+multi(); 
+digitalWrite(2, LOW); 
+digitalWrite(3, LOW); 
+digitalWrite(ledpin,LOW); 
+findmax(); loop(); } else single(); loop(); } 
+void multi() { i++; 
+int score=0; delay(2000); lcd.print("Starting multiplayer game"); 
+Serial.print("\n Starting multiplayer game"); 
+delay(2000); lcd.clear(); 
+digitalWrite(2, LOW); digitalWrite(3, LOW); 
+// check if pushbutton is pressed. if it is, the 
+// button state is HIGH 
+digitalWrite(2, HIGH); 
+//level1 delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState2 == HIGH) { score-=5; } if (buttonState1 == HIGH) { score+=10; 
+digitalWrite(2, LOW); } else 
+{score-=5; } 
+digitalWrite(3,HIGH); //level 2 
+delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState1 == HIGH) {score-=5; } if (buttonState2 == HIGH) {score+=10; 
+digitalWrite(3, LOW); } else 
+{score-=5; } digitalWrite(2,HIGH);//level 3 delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState2 == HIGH) {score-=5; } if (buttonState1 == HIGH) {score+=10; 
+digitalWrite(2, LOW); } else 
+{ score-=5; } digitalWrite(3,HIGH);//level 4 delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); 
+buttonState2 = digitalRead(9); 
+if (buttonState1 == HIGH) {score-=5; } if (buttonState2 == HIGH) {score+=10; 
+digitalWrite(3, LOW); } else 
+{ score-=5; } digitalWrite(2,HIGH);// level 5 delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState2 == HIGH) {score-=5; } if (buttonState1 == HIGH) {score+=10; 
+digitalWrite(2, LOW); } else 
+{ score-=5; } digitalWrite(2,HIGH); digitalWrite(3,HIGH);//level 6 delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState2 == HIGH && buttonState1 == HIGH) 
+{score+=10; 
+digitalWrite(3, LOW); digitalWrite(2, LOW); } else 
+{ score-=5; } digitalWrite(2,HIGH);// level 7 delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState2 == HIGH) {score-=5; } 
+if (buttonState1 == HIGH) {score+=10; 
+digitalWrite(2, LOW); } else 
+{ score-=5; } digitalWrite(2,HIGH);// level 8 delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState2 == HIGH) {score-=5; } if (buttonState1 == HIGH) {score+=10; 
+digitalWrite(2, LOW); } else 
+{score-=5; } digitalWrite(3,HIGH);// level 9 delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState1 == HIGH) {score-=5; } if (buttonState2 == HIGH) {score+=10; 
+digitalWrite(3, LOW); } 
+else 
+{ score-=5; } digitalWrite(3,HIGH); // level 10 digitalWrite(2,HIGH); delay(2000); // read the state of the pushbutton 
+buttonState1 = digitalRead(8); buttonState2 = digitalRead(9); 
+if (buttonState2 == HIGH && buttonState1 == HIGH) 
+{score+=10; 
+digitalWrite(3, LOW); digitalWrite(2, LOW); } else 
+{ score-=5; } lcd.print("your Score:"); Serial.print("\n your Score:"); lcd.print(score); 
+Serial.print(score); delay(5000); lcd.clear(); 
+a[i]=score; }void findmax() 
+{ 
+int j=0; int b=a[0]; for(j=0;j<i;j++) 
+{if(b<a[j]) 
+{ b=a[j]; } } lcd.clear(); lcd.print(" max score of player:"); Serial.print("\n max score of player:"); 
+lcd.setCursor(2,1); lcd.print(j); 
+Serial.print(j); delay(5000); lcd.clear(); lcd.print("score:"); Serial.print("\nscore:");//check display 
+lcd.setCursor(2,1); lcd.print(a[j]); Serial.print(a[j]); delay(5000); lcd.clear(); 
+} 
